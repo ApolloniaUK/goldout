@@ -1,64 +1,142 @@
-.\" Copyright (c) 2026, Stephane Sudre.
-.Dd September 17, 2026
+.\" Copyright (c) 2026, Alan Staniforth.
+.Dd October 1, 2026
 .Dt GOLDOUT 1
-.Os "macOS"
+.Os
 .Sh NAME
-.Nm /usr/local/bin/goldout
-.Nd Join AppleDouble files into two-fork HFS resource files.
+.Nm goldout
+.Nd Join AppleDouble files back onto their data files as two-fork files
 .Sh SYNOPSIS
 .Nm
 .Op Fl h , Fl \-help
 .Op Fl q , Fl \-quiet
+.Op Fl n , Fl \-nolegacy
 .Op Fl \-nosetinfo
 .Op Fl \-nodelete
+.Op Fl \-norecurse
 .Op Fl \-version
-.Ar path ...
+.Op Ar PATH ...
 .Sh DESCRIPTION
-Goldout is the counterpart to 
-.Xr SplitForks 1 
-or 
+Goldout is the counterpart to
+.Xr SplitForks 1
+or
 .Xr goldin 1 .
-Goldin will recursively traverse any directory passed to it looking for
-AppleDouble files. So long as the directories are on an HFS or HFS+ volume
-and there is a matching main (data fork) file goldout will unite each pair
-as one two-forked file whose resource fork can be accessed by Resource 
-Manager calls or via the ..namedfork/rsrc path method.
+It exists because in macOS Sierra and later the
+Apple-provided /System/Library/CoreServices/FixupResourceForks is missing.
 .Pp
-Goldin exists because in later versions of Max OS X (Sierra onwards) the
-Apple provided /System/Library/CoreServices/FixupResourceForks is missing.
+Goldout accepts directories or files as arguments.
+It will recursively traverse any directory passed to it looking for
+AppleDouble files.
+When an AppleDouble file is found (or is passed as an argument), if
+there is a matching counterpart (data fork) file, goldout will unite the
+two as one two-fork file whose resource fork can be accessed by Resource
+Manager calls or via the ..namedfork/rsrc path method.
+A resource fork in the AppleDouble file replaces any resource fork the data file
+already has.
+If the counterpart is a folder, only its Finder information is restored.
+.Pp
+Processed AppleDouble files will be deleted unless the
+.Fl \-nodelete
+option is passed.
+.Pp
+If an AppleDouble file cannot be processed, goldout reports the error, leaves
+the file in place and carries on; it then exits with status 1 when it has
+finished.
+Folders that cannot be read, including a
+.Ar PATH
+itself, are reported and skipped.
+If a
+.Ar PATH
+cannot be processed at all (for example, it does not exist or is on an
+unsupported file system), goldout reports the error and stops without
+processing the remaining paths.
+.Pp
+If no
+.Ar PATH
+is given, goldout processes the whole boot volume, starting at
+.Pa / .
+This matches the behaviour of FixupResourceForks.
+Use
+.Fl n
+or
+.Fl \-nolegacy
+to make a missing
+.Ar PATH
+an error instead.
 .Pp
 .Nm
 accepts these flags and arguments:
 .Bl -tag -width -indent
 .It Fl h , Fl \-help
-Print usage information.
+Print usage information and exit.
 .It Fl q , Fl \-quiet
-No diagnostic output.
+Do not list the AppleDouble files as they are processed.
+Errors are still reported on standard error.
+.It Fl n , Fl \-nolegacy
+Don't default to
+.Pa /
+when no
+.Ar PATH
+is given; report an error and exit instead.
+To make this the default, add an alias such as
+.Dl alias goldout='goldout -n'
+to your shell start-up file.
 .It Fl \-nosetinfo
-Don't set type, creator, flags, permissions.
+Don't restore the Finder information (such as type, creator and Finder flags)
+from the AppleDouble file.
 .It Fl \-nodelete
 Don't delete the AppleDouble file after adding the resource fork and metadata
-to the main file.
+to the counterpart (data fork) file.
+.It Fl \-norecurse
+Only examine the AppleDouble files directly inside each
+.Ar PATH ;
+don't descend into its subdirectories.
 .It Fl \-version
-Display the tool's version.
-.It Ar path ...
-One or more directories to examine. Goldout willl not accept files passed as arguments.
+Print the tool's version and exit.
+.It Ar PATH ...
+One or more directories or files to examine.
+If omitted, processing starts at
+.Pa /
+unless
+.Fl n
+or
+.Fl \-nolegacy
+is passed.
+Files passed as arguments must be the AppleDouble encoded part of a file or
+folder pair, and their names must begin with
+.Ql \&._ .
 .El
-.Pp
 .Sh FILES
-.Bl  -tag -width -indent
+.Bl -tag -width -indent
+.It Pa /usr/local/bin/goldout
+The installed tool.
 .It example
-Data fork file
+Data fork file.
 .It \._example
 AppleDouble encoded resource fork and metadata.
 .El
+.Sh EXIT STATUS
+.Bl -tag -width Ds
+.It 0
+Success.
+.It 1
+One or more AppleDouble files could not be processed, or a
+.Ar PATH
+could not be processed.
+.It 2
+An unknown option was given, or no
+.Ar PATH
+was given with
+.Fl n .
+.El
 .Sh NOTES
-Goldout will do nothing if the directory is on an APFS volime.
+Goldout works on HFS, HFS+ and APFS volumes.
+It fails with an error on any other file system.
 .Pp
-Goldout lives here: https://github.com/packagesdev/goldout.
-.Sh SEE ALSO 
-.Xr SplitForks 1 , 
-.Xr FixupResourceForks 1 , 
-.Xr goldin 1 , 
+Goldout lives here:
+.Lk https://github.com/packagesdev/goldout .
+.Sh SEE ALSO
+.Xr FixupResourceForks 1 ,
+.Xr goldin 1 ,
+.Xr SplitForks 1
 .Sh STANDARDS
 RFC 1740 documents AppleSingle/AppleDouble formats.

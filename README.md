@@ -1,47 +1,75 @@
 ## Synopsis
 
-If you have been using SplitForks and FixupResourceForks to enable version
-control modern version control systems (Git &c) this stopped working when
-FixupResourceForks disappeared around about Sierra.
-
-Goldout is pretty much an option identical replacement for FixupResourceForks/ 
+Goldout: a modern replacement for FixupResourceForks.
 
 ## Motivation
 
-Since FixupResourceForks has been apparently removed from macOS Sierra and
-later, it might be useful to have a replacement.
+If you have been using SplitForks and FixupResourceForks to enable version
+control with modern version control systems (Git &c), this technique stopped
+working when FixupResourceForks disappeared in macOS Sierra.
+
+Goldout is a near drop-in replacement for FixupResourceForks, with some
+enhancements.
+
+## Improvements over FixupResourceForks
 
 To address some issues of FixupResourceForks, the following improvements have
 been made:
 
-- it's a 32 and 64-bit binary.
+- it can be built as 32- and 64-bit.[^1]
+- it can be built for Intel and Apple Silicon.[^1], [^2]
 - it does not use deprecated APIs.
-- it does not assume there are both FinderInfo and Resource Fork entries in the AppleDouble file.
+- it does not assume there are both FinderInfo and resource fork entries in the AppleDouble file.
+- long options are called with `--`.
 - the source code is available.
-- long options are called with --
-
-Minimum OS requirement is Mac OS X 10.8 at this time.
 
 ## Usage
 
-	$ goldout [options] file ...
+	$ goldout [options] [PATH ...]
 	
 	  Options:
 	  --help, -h           Show this usage guide
 	  --quiet, -q          Do not display the list of processed files
+	  --nolegacy, -n       Require a path instead of defaulting to /
 	  --nosetinfo          Do not set the FinderInfo
 	  --nodelete           Do not delete the AppleDouble file
+	  --norecurse          Do not descend into subdirectories
 	  --version            Show the version of this tool
 
-As with FixupResourceForks, if no files are provided, / will be used.
+As with FixupResourceForks, if no path is provided, / will be used. Pass
+`--nolegacy` (`-n`) to make a missing path an error instead. To make that the
+default in your interactive shell, add this to `.bash_profile`:
+
+	alias goldout='goldout -n'
+
+FixupResourceForks accepted `-norecurse` but ignored it. Goldout implements
+`--norecurse`: only the AppleDouble files directly inside each path are
+processed, and subdirectories are skipped.
+
+A resource fork in the AppleDouble file replaces any resource fork the data file
+already has.
+
+Goldout works on HFS, HFS+ and APFS volumes.
+
+If an AppleDouble file cannot be processed, Goldout reports the error, leaves
+the file in place and carries on, then exits with status 1 when it has
+finished. Folders that cannot be read are reported and skipped.
+
+[^1]: Depending on your build environment and host.
+[^2]: Possibly even PPC if you have a modified Xcode.
+
+## Compatibility
+
+Minimum OS requirement is Mac OS X 10.8 at this time.
 
 ## Tests
 
-Description forthcoming
+Description forthcoming.
 
 ## License
 
 Copyright (c) 2017, Stephane Sudre
+Portions copyright (c) 2026, Alan Staniforth
 All rights reserved.
  
 Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
