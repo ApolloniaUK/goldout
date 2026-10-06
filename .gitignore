@@ -25,3 +25,6 @@ build/
 
 # macOS
 .DS_Store
+
+# Release binaries and logs copied out by the release and local install schemes
+binaries/

@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Scheme
+   LastUpgradeVersion = "1620"
+   version = "2.2">
+   <BuildAction
+      parallelizeBuildables = "YES"
+      buildImplicitDependencies = "YES"
+      buildArchitectures = "All">
+      <PostActions>
+         <ExecutionAction
+            ActionType = "Xcode.IDEStandardExecutionActionsCore.ExecutionActionType.ShellScriptAction">
+            <ActionContent
+               title = "Run Script"
+               scriptText = "# Install the Release binaries and man pages into /usr/local after a successful build.&#10;# If the current user can&apos;t write to the destination folders (or to copies already&#10;# installed there), the standard macOS dialog asks for an administrator&apos;s name and&#10;# password, and the installed files are then given the owner and group of the folder&#10;# they are in.&#10;mkdir -p &quot;$PROJECT_DIR/binaries&quot;&#10;exec &gt; &quot;$PROJECT_DIR/binaries/install.log&quot; 2&gt;&amp;1&#10;[ &quot;$CONFIGURATION&quot; = &quot;Release&quot; ] || exit 0&#10;&#10;BIN_DIR=/usr/local/bin&#10;MAN_DIR=/usr/local/share/man/man1&#10;&#10;# The tools this build produced&#10;&#10;TOOLS=&quot;&quot;&#10;for tool in goldout; do&#10;    [ -f &quot;$BUILT_PRODUCTS_DIR/$tool&quot; ] &amp;&amp; TOOLS=&quot;$TOOLS $tool&quot;&#10;done&#10;&#10;if [ -z &quot;$TOOLS&quot; ]; then&#10;    echo &quot;Nothing to install&quot;&#10;    exit 0&#10;fi&#10;&#10;# Can the current user do the copy without help?&#10;&#10;NEEDS_ADMIN=no&#10;for dir in &quot;$BIN_DIR&quot; &quot;$MAN_DIR&quot;; do&#10;    [ -d &quot;$dir&quot; ] &amp;&amp; [ -w &quot;$dir&quot; ] || NEEDS_ADMIN=yes&#10;done&#10;for tool in $TOOLS; do&#10;    for file in &quot;$BIN_DIR/$tool&quot; &quot;$MAN_DIR/$tool.1&quot;; do&#10;        [ ! -e &quot;$file&quot; ] || [ -w &quot;$file&quot; ] || NEEDS_ADMIN=yes&#10;    done&#10;done&#10;&#10;if [ &quot;$NEEDS_ADMIN&quot; = no ]; then&#10;    echo &quot;Installing$TOOLS as $(id -un)&quot;&#10;    for tool in $TOOLS; do&#10;        cp -p &quot;$BUILT_PRODUCTS_DIR/$tool&quot; &quot;$BIN_DIR/&quot; || exit 1&#10;        cp -p &quot;$PROJECT_DIR/$tool/$tool.1&quot; &quot;$MAN_DIR/&quot; || exit 1&#10;    done&#10;    echo &quot;Done&quot;&#10;    exit 0&#10;fi&#10;&#10;# Otherwise copy as root, then give each file the owner and group of its folder.&#10;# The arguments are passed separately and quoted by AppleScript, so paths with&#10;# spaces or brackets are safe.&#10;&#10;ROOT_SCRIPT=&apos;&#10;bin_dir=$1; man_dir=$2; products_dir=$3; project_dir=$4; shift 4&#10;mkdir -p &quot;$bin_dir&quot; &quot;$man_dir&quot; || exit 1&#10;bin_owner=$(stat -f %u:%g &quot;$bin_dir&quot;)&#10;man_owner=$(stat -f %u:%g &quot;$man_dir&quot;)&#10;for tool in &quot;$@&quot;; do&#10;    cp -p &quot;$products_dir/$tool&quot; &quot;$bin_dir/&quot; || exit 1&#10;    chown &quot;$bin_owner&quot; &quot;$bin_dir/$tool&quot; &amp;&amp; chmod 755 &quot;$bin_dir/$tool&quot; || exit 1&#10;    cp -p &quot;$project_dir/$tool/$tool.1&quot; &quot;$man_dir/&quot; || exit 1&#10;    chown &quot;$man_owner&quot; &quot;$man_dir/$tool.1&quot; &amp;&amp; chmod 644 &quot;$man_dir/$tool.1&quot; || exit 1&#10;done&#10;&apos;&#10;&#10;echo &quot;Installing$TOOLS with administrator privileges&quot;&#10;/usr/bin/osascript - &quot;$ROOT_SCRIPT&quot; &quot;$BIN_DIR&quot; &quot;$MAN_DIR&quot; &quot;$BUILT_PRODUCTS_DIR&quot; &quot;$PROJECT_DIR&quot; $TOOLS &lt;&lt;&apos;APPLESCRIPT&apos;&#10;on run argv&#10;    set command to &quot;/bin/sh -c &quot; &amp; quoted form of (item 1 of argv) &amp; &quot; sh&quot;&#10;    repeat with i from 2 to count of argv&#10;        set command to command &amp; &quot; &quot; &amp; quoted form of (item i of argv)&#10;    end repeat&#10;    do shell script command with administrator privileges&#10;end run&#10;APPLESCRIPT&#10;STATUS=$?&#10;[ $STATUS -eq 0 ] &amp;&amp; echo &quot;Done&quot; || echo &quot;Installation failed or was cancelled (status $STATUS)&quot;&#10;exit $STATUS&#10;">
+               <EnvironmentBuildable>
+                  <BuildableReference
+                     BuildableIdentifier = "primary"
+                     BlueprintIdentifier = "F4510BE71FA3610A00A5C02C"
+                     BuildableName = "goldout"
+                     BlueprintName = "goldout"
+                     ReferencedContainer = "container:goldout.xcodeproj">
+                  </BuildableReference>
+               </EnvironmentBuildable>
+            </ActionContent>
+         </ExecutionAction>
+      </PostActions>
+      <BuildActionEntries>
+         <BuildActionEntry
+            buildForTesting = "NO"
+            buildForRunning = "YES"
+            buildForProfiling = "NO"
+            buildForArchiving = "NO"
+            buildForAnalyzing = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "F4510BE71FA3610A00A5C02C"
+               BuildableName = "goldout"
+               BlueprintName = "goldout"
+               ReferencedContainer = "container:goldout.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "NO"
+            buildForProfiling = "NO"
+            buildForArchiving = "NO"
+            buildForAnalyzing = "NO">
+            <AutocreatedTestPlanReference>
+            </AutocreatedTestPlanReference>
+         </BuildActionEntry>
+      </BuildActionEntries>
+   </BuildAction>
+   <TestAction
+      buildConfiguration = "Debug"
+      selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
+      selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
+      shouldUseLaunchSchemeArgsEnv = "YES"
+      shouldAutocreateTestPlan = "YES">
+   </TestAction>
+   <LaunchAction
+      buildConfiguration = "Release"
+      selectedDebuggerIdentifier = ""
+      selectedLauncherIdentifier = "Xcode.IDEFoundation.Launcher.PosixSpawn"
+      launchStyle = "1"
+      useCustomWorkingDirectory = "NO"
+      ignoresPersistentStateOnLaunch = "NO"
+      debugDocumentVersioning = "YES"
+      debugServiceExtension = "internal"
+      allowLocationSimulation = "YES"
+      viewDebuggingEnabled = "No">
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "F4510BE71FA3610A00A5C02C"
+            BuildableName = "goldout"
+            BlueprintName = "goldout"
+            ReferencedContainer = "container:goldout.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
+   </LaunchAction>
+   <ProfileAction
+      buildConfiguration = "Release"
+      shouldUseLaunchSchemeArgsEnv = "YES"
+      savedToolIdentifier = ""
+      useCustomWorkingDirectory = "NO"
+      debugDocumentVersioning = "YES">
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "F4510BE71FA3610A00A5C02C"
+            BuildableName = "goldout"
+            BlueprintName = "goldout"
+            ReferencedContainer = "container:goldout.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
+   </ProfileAction>
+   <AnalyzeAction
+      buildConfiguration = "Debug">
+   </AnalyzeAction>
+   <ArchiveAction
+      buildConfiguration = "Release"
+      revealArchiveInOrganizer = "YES">
+   </ArchiveAction>
+</Scheme>
