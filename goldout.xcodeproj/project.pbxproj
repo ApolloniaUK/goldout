@@ -94,6 +94,11 @@
 			attributes = {
 				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = "Stephane Sudre";
+				TargetAttributes = {
+					F4510BE71FA3610A00A5C02C = {
+						ProvisioningStyle = Manual;
+					};
+				};
 			};
 			buildConfigurationList = F4510BE31FA3610900A5C02C /* Build configuration list for PBXProject "goldout" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -209,10 +214,12 @@
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD)";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Developer ID Application";
+				CODE_SIGN_STYLE = Manual;
 				DSTROOT = "/tmp/$(TARGET_NAME).dst";
 				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 			};
 			name = Debug;
 		};
@@ -221,10 +228,12 @@
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD)";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Developer ID Application";
+				CODE_SIGN_STYLE = Manual;
 				DSTROOT = "/tmp/$(TARGET_NAME).dst";
 				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 			};
 			name = Release;
 		};
