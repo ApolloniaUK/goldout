@@ -672,7 +672,7 @@ int main(int argc, const char * argv[])
         
         int tOptionIndex = 0;
         
-        c = getopt_long (argc, (char **) argv, "vdt:F:",tLongOptions, &tOptionIndex);
+        c = getopt_long (argc, (char **) argv, "hq",tLongOptions, &tOptionIndex);
         
         /* Detect the end of the options. */
         if (c == -1)

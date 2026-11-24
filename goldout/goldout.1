@@ -1,0 +1,64 @@
+.\" Copyright (c) 2026, Stephane Sudre.
+.Dd September 17, 2026
+.Dt GOLDOUT 1
+.Os "macOS"
+.Sh NAME
+.Nm /usr/local/bin/goldout
+.Nd Join AppleDouble files into two-fork HFS resource files.
+.Sh SYNOPSIS
+.Nm
+.Op Fl h , Fl \-help
+.Op Fl q , Fl \-quiet
+.Op Fl \-nosetinfo
+.Op Fl \-nodelete
+.Op Fl \-version
+.Ar path ...
+.Sh DESCRIPTION
+Goldout is the counterpart to 
+.Xr SplitForks 1 
+or 
+.Xr goldin 1 .
+Goldin will recursively traverse any directory passed to it looking for
+AppleDouble files. So long as the directories are on an HFS or HFS+ volume
+and there is a matching main (data fork) file goldout will unite each pair
+as one two-forked file whose resource fork can be accessed by Resource 
+Manager calls or via the ..namedfork/rsrc path method.
+.Pp
+Goldin exists because in later versions of Max OS X (Sierra onwards) the
+Apple provided /System/Library/CoreServices/FixupResourceForks is missing.
+.Pp
+.Nm
+accepts these flags and arguments:
+.Bl -tag -width -indent
+.It Fl h , Fl \-help
+Print usage information.
+.It Fl q , Fl \-quiet
+No diagnostic output.
+.It Fl \-nosetinfo
+Don't set type, creator, flags, permissions.
+.It Fl \-nodelete
+Don't delete the AppleDouble file after adding the resource fork and metadata
+to the main file.
+.It Fl \-version
+Display the tool's version.
+.It Ar path ...
+One or more directories to examine. Goldout willl not accept files passed as arguments.
+.El
+.Pp
+.Sh FILES
+.Bl  -tag -width -indent
+.It example
+Data fork file
+.It \._example
+AppleDouble encoded resource fork and metadata.
+.El
+.Sh NOTES
+Goldout will do nothing if the directory is on an APFS volime.
+.Pp
+Goldout lives here: https://github.com/packagesdev/goldout.
+.Sh SEE ALSO 
+.Xr SplitForks 1 , 
+.Xr FixupResourceForks 1 , 
+.Xr goldin 1 , 
+.Sh STANDARDS
+RFC 1740 documents AppleSingle/AppleDouble formats.

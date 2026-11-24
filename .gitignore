@@ -2,8 +2,6 @@
 xcuserdata/
 *.xcuserstate
 *.xcscmblueprint
-*.pbxuser
-*.perspectivev3
 *.moved-aside
 *.xccheckout
 project.xcworkspace/
@@ -22,105 +20,8 @@ build/
 *.perspective
 *.perspectivev3
 
+# Editors
+*.swp
+
 # macOS
 .DS_Store
-
-# Ignore directories with brackets around names
-(*)
-
-# (Tools) is tracked despite the (*) rule above
-!/(Tools)/
-(Tools)/Resource Fork Management/*/binaries/
-(Tools)/Resource Fork Management/*/Prompt Scratchpad and To-Do Notes.md
-*/html
-*.swp
-Game Typer
-XcodePort
-_Archived Items
-Source/Prefix/DebugCarbonHeaders++
-Source/Prefix/DebugCarbonMSLPackageHeaders1028++
-Source/Prefix/DebugCarbonMSLPackageHeaders104u++
-Source/Prefix/DebugCarbonPackageHeaders++
-Source/Prefix/DebugClassicHeaders68K++
-Source/Prefix/DebugClassicHdrsCFM68K++
-Source/Prefix/DebugClassicHeadersPPC++
-Source/Prefix/FinalCarbonHeaders++
-Source/Prefix/FinalClassicHeaders68K++
-Source/Prefix/FinalClassicHeadersPPC++
-Source/Prefix/FinalClassicHdrsCFM68K++
-Source/Prefix/._DebugCarbonHeaders++
-Source/Prefix/._DebugCarbonMSLPackageHeaders1028++
-Source/Prefix/._DebugCarbonMSLPackageHeaders104u++
-Source/Prefix/._DebugCarbonPackageHeaders++
-Source/Prefix/._DebugClassicHeaders68K++
-Source/Prefix/._DebugClassicHdrsCFM68K++
-Source/Prefix/._DebugClassicHeadersPPC++
-Source/Prefix/._FinalCarbonHeaders++
-Source/Prefix/._FinalCarbonMSLPackageHeaders104u++
-Source/Prefix/._FinalClassicHeaders68K++
-Source/Prefix/._FinalClassicHeadersPPC++
-(Documentation)/*
-(Graphics Dev Files)/*
-(Graphics Dev Files)/stdebugger/*
-Level 9 Carbon Data
-Level 9 Data
-Level 9 Carbon.CWPro8 Data
-Level9 copy.xcodeproj
-Source/(Misc Docs)/Carbon:OS X Icons/Level 9 Application Icon.psd
-Source/(Misc Docs)/Carbon:OS X Icons/Level 9 Document Icons.psd
-Source/(Misc Docs)/Carbon:OS X Icons/Level 9 Document Picture -  Template 2.psd
-Source/(Misc Docs)/Carbon:OS X Icons/Level 9 Document Picture -  Template.psd
-Source/(Misc Docs)/Carbon:OS X Icons/Level 9 Document Picture - Game.psd
-Source/(Misc Docs)/Carbon:OS X Icons/Level 9 Document Picture - Preferences.psd
-Source/(Misc Docs)/Carbon:OS X Icons/Level 9 Document Picture - Save.psd
-Source/(Misc Docs)/Carbon:OS X Icons/Level 9 Document Picture - Text.psd
-Source/(Misc Docs)/Carbon:OS X Icons/Level 9 Game Document Book.psd
-Source/(Misc Docs)/Carbon:OS X Icons/New Icon Families
-Source/(Misc Docs)/Carbon:OS X Icons/Original Art for New Icons
-Source/(Misc Docs)/Carbon:OS X Icons/Sonnets Skewed
-Source/(Misc Docs)/BBC Graphics info.txt
-Source/(Misc Docs)/Carbon:OS X Icons
-Source/(Misc Docs)/Console Save Game Editing
-Source/(Misc Docs)/DCon.h
-Source/(Misc Docs)/David Kinder's Graphics SDK.txt
-Source/(Misc Docs)/David Kinders Graphics SDK.txt
-Source/(Misc Docs)/Default Window Message
-Source/(Misc Docs)/Diablo II  ƒ
-Source/(Misc Docs)/Disable Fract Font width in OSX
-Source/(Misc Docs)/Game Typer Source
-Source/(Misc Docs)/GeneralHashFunctions_-_C
-Source/(Misc Docs)/GeneralHashFunctions_-_C.zip
-Source/(Misc Docs)/Level 9 Lickable Scratch
-Source/(Misc Docs)/Level 9 Pictures
-Source/(Misc Docs)/Logo Editing
-Source/(Misc Docs)/Manual Picture Scans (and misc)
-Source/(Misc Docs)/New Level 9 Icon
-Source/(Misc Docs)/Original Level 9 Source
-Source/(Misc Docs)/README (IF-Archive Upload)
-Source/(Misc Docs)/SeedCFill Carbon
-Source/(Misc Docs)/Version 2 Icon Art
-Source/(Misc Docs)/breslin4.txt
-Source/(Misc Docs)/extension check
-Source/(Misc Docs)/Carbon:OS X Icons/Level 9 Document Picture -  Template copy.psd
-Source/(Misc Docs)/Carbon:OS X Icons/OS X Leopard Folder.psd
-Source/(Misc Docs)/Carbon:OS X Icons/Script Icon.psd
-Old "Level 9 Carbon.mcp"Project File and Data Folder.zip
-Source/Prefix/FinalCarbonMSLPackageHeaders104u++
-(Tools)/Quit The Application
-(Distribution)/Classic Binary Distribution/
-(Distribution)/Distribution/
-(Distribution)/OS X Binary Distribution.sparsebundle/
-(Distribution)/Source Distribution.sparsebundle/
-(HTML Documentation)/*
-(Distribution)/(Distribution Build Components Archive)/Level9.xcodeproj/*.mode2
-(Distribution)/(Distribution Build Components Archive)/Level9.xcodeproj/alan.mode2v3
-(Distribution)/(Distribution Build Components Archive)/Level9.xcodeproj/alan.pbxuser
-(Notes)/Signing Test
-(Xcode Build System Support Scripts)/release-dir
-CFM_MachO_CFM*
-MachOCFM
-._MachoCFM
-
-# Per-machine settings for goldin/goldout (signing identity, legacy build host)
-(Tools)/Resource Fork Management/*/Config/Local.xcconfig
-(Tools)/Resource Fork Management/*/Local.mk

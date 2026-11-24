@@ -1,12 +1,18 @@
 ## Synopsis
 
-goldout does the opposite of goldin.
+If you have been using SplitForks and FixupResourceForks to enable version
+control modern version control systems (Git &c) this stopped working when
+FixupResourceForks disappeared around about Sierra.
+
+Goldout is pretty much an option identical replacement for FixupResourceForks/ 
 
 ## Motivation
 
-Since FixupResourceForks has been apparently removed from macOS Sierra and later, it might be useful to have a replacement.
+Since FixupResourceForks has been apparently removed from macOS Sierra and
+later, it might be useful to have a replacement.
 
-To address some issues of FixupResourceForks, the following improvements have been made:
+To address some issues of FixupResourceForks, the following improvements have
+been made:
 
 - it's a 32 and 64-bit binary.
 - it does not use deprecated APIs.

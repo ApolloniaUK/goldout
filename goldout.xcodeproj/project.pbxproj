@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		F4510BEC1FA3610A00A5C02C /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = F4510BEB1FA3610A00A5C02C /* main.c */; };
+		E7048F9D305C87D1004A87C4 /* goldout.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = E7048F9C305C877D004A87C4 /* goldout.1 */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -17,14 +18,16 @@
 			dstPath = /usr/share/man/man1/;
 			dstSubfolderSpec = 0;
 			files = (
+				E7048F9D305C87D1004A87C4 /* goldout.1 in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 1;
 		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		F4510BE81FA3610A00A5C02C /* goldout */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = goldout; sourceTree = BUILT_PRODUCTS_DIR; };
 		F4510BEB1FA3610A00A5C02C /* main.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
+		E7048F9C305C877D004A87C4 /* goldout.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = goldout.1; sourceTree = "<group>"; };
+		F4510BE81FA3610A00A5C02C /* goldout */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = goldout; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +61,7 @@
 			isa = PBXGroup;
 			children = (
 				F4510BEB1FA3610A00A5C02C /* main.c */,
+				E7048F9C305C877D004A87C4 /* goldout.1 */,
 			);
 			path = goldout;
 			sourceTree = "<group>";
@@ -96,6 +100,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 			);
 			mainGroup = F4510BDF1FA3610900A5C02C;
@@ -200,6 +205,10 @@
 		F4510BF21FA3610A00A5C02C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
+				DSTROOT = "/tmp/$(TARGET_NAME).dst";
+				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = NO;
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -207,6 +216,10 @@
 		F4510BF31FA3610A00A5C02C /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
+				DSTROOT = "/tmp/$(TARGET_NAME).dst";
+				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = NO;
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
