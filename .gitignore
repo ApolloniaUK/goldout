@@ -28,3 +28,6 @@ build/
 
 # Release binaries and logs copied out by the release and local install schemes
 binaries/
+
+# Per-machine signing settings (see README-Signing.md)
+Config/Local.xcconfig

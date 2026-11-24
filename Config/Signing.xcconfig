@@ -1,0 +1,17 @@
+// Code signing settings for the goldout target.
+//
+// These defaults let anyone build a fresh clone: the tools are signed ad hoc
+// ("Sign to Run Locally"), with no team and no certificate.
+//
+// To sign with your own identity, copy Local.xcconfig.example to
+// Local.xcconfig, in this folder, and edit it. Local.xcconfig is not tracked
+// by git and, when present, overrides the settings below.
+
+CODE_SIGN_STYLE = Manual
+CODE_SIGN_IDENTITY = -
+DEVELOPMENT_TEAM =
+PROVISIONING_PROFILE_SPECIFIER =
+ENABLE_HARDENED_RUNTIME = NO
+OTHER_CODE_SIGN_FLAGS =
+
+#include? "Local.xcconfig"

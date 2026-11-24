@@ -27,6 +27,7 @@
 /* Begin PBXFileReference section */
 		F4510BEB1FA3610A00A5C02C /* main.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
 		E7048F9C305C877D004A87C4 /* goldout.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = goldout.1; sourceTree = "<group>"; };
+		E7C0F16E2F00000100A1B2C3 /* Signing.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Signing.xcconfig; sourceTree = "<group>"; };
 		F4510BE81FA3610A00A5C02C /* goldout */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = goldout; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -41,10 +42,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		E7C0F16E2F00000200A1B2C3 /* Config */ = {
+			isa = PBXGroup;
+			children = (
+				E7C0F16E2F00000100A1B2C3 /* Signing.xcconfig */,
+			);
+			path = Config;
+			sourceTree = "<group>";
+		};
 		F4510BDF1FA3610900A5C02C = {
 			isa = PBXGroup;
 			children = (
 				F4510BEA1FA3610A00A5C02C /* goldout */,
+				E7C0F16E2F00000200A1B2C3 /* Config */,
 				F4510BE91FA3610A00A5C02C /* Products */,
 			);
 			sourceTree = "<group>";
@@ -193,7 +203,6 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
@@ -204,36 +213,31 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.8;
-				"OTHER_CODE_SIGN_FLAGS[sdk=*]" = "--timestamp";
 				SDKROOT = macosx;
 			};
 			name = Release;
 		};
 		F4510BF21FA3610A00A5C02C /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E7C0F16E2F00000100A1B2C3 /* Signing.xcconfig */;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD)";
-				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Developer ID Application";
-				CODE_SIGN_STYLE = Manual;
 				DSTROOT = "/tmp/$(TARGET_NAME).dst";
 				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.5;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
 			};
 			name = Debug;
 		};
 		F4510BF31FA3610A00A5C02C /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E7C0F16E2F00000100A1B2C3 /* Signing.xcconfig */;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD)";
-				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Developer ID Application";
-				CODE_SIGN_STYLE = Manual;
 				DSTROOT = "/tmp/$(TARGET_NAME).dst";
 				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.5;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
 			};
 			name = Release;
 		};
